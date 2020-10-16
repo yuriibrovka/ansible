@@ -1,0 +1,21 @@
+---
+# tasks file for define_content
+ - name: Verify file existing
+   stat: 
+      path: /etc/iaac
+   register: result
+
+ - name: Make variable
+   shell: cat /etc/iaac
+   register: cat_iaas
+   when: result.stat.exists
+
+ - name: echo file
+   debug:
+     msg: "Content is {{cat_iaas.stdout}}, hostname is {{ansible_hostname}} "
+   when: result.stat.exists
+ 
+ - name: echo only hostname
+   debug:
+     msg: "Hostname is {{ansible_hostname}}"
+   when: result.stat.exists == false

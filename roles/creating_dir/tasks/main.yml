@@ -1,0 +1,9 @@
+---
+# tasks file for creating_dir
+ - name: Creating file
+   file:
+    path: /etc/iaac
+    force: no
+    state: touch
+    mode: 500
+   
